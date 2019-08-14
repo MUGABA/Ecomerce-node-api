@@ -1,0 +1,39 @@
+{
+  "name": "Ecomerce-node-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MUGABA/Ecomerce-node-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MUGABA/Ecomerce-node-api/issues"
+  },
+  "homepage": "https://github.com/MUGABA/Ecomerce-node-api#readme",
+  "dependencies": {
+    "@hapi/joi": "^15.1.0",
+    "bcrypt": "^3.0.6",
+    "config": "^3.2.2",
+    "eslint": "^6.1.0",
+    "express": "^4.17.1",
+    "express-async-error": "0.0.2",
+    "helmet": "^3.20.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "eslint": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "make-runnable": "^1.3.6"
+  }
+}
