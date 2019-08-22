@@ -1,10 +1,10 @@
 import Joi from '@hapi/joi'
 
-validateCustomer = (inputInfo)=>{
-	const schema = Joi.object().key({
+const validateCustomer = (inputInfo)=>{
+	const schema = Joi.object().keys({
 		firstName:Joi.string().min(3).max(50).required(),
 		lastName:Joi.string().min(3).max(50).required(),
-		locattion:Joi.string().required(),
+		location:Joi.string().required(),
 		email:Joi.string().email().required(),
 		password:Joi.string().min(8).max(10).required(),
 		contact:Joi.string().min(8).required(),
@@ -13,17 +13,26 @@ validateCustomer = (inputInfo)=>{
 	return Joi.validate(inputInfo,schema);
 }
 
-validateLogin = (inputInfo) =>{
-	const schema = Joi.object().key({
+const validateLogin = (inputInfo) =>{
+	const schema = Joi.object().keys({
 		email:Joi.string().email().required(),
 		password:Joi.string().min(8).max(10).required(),
 	});
 	return Joi.validate(inputInfo, schema)
 }
 
+const validateUpdate = (inputInfo) =>{
+	const schema = Joi.object().keys({
+		contact:Joi.string().required(),
+		creditCard:Joi.string().min(8).required()
+	})
+	return Joi.validate(inputInfo,schema);
+}
+
 module.exports = {
 	validateCustomer,
-	validateLogin
+	validateLogin,
+	validateUpdate
 }
 
 

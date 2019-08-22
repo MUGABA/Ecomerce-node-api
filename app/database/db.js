@@ -1,25 +1,19 @@
-import pool from './conn'
+import  conn from './conn'
 
-pool.on('connect',()=>{
-	console.log('connected to node_app database')
-});
-
-
-async function runQuery(q){
-	await pool.query(q)
-		.then((res)=>{
-			console.log(res)
-			pool.end()
-		});
-		.catch(err=>{
-			console.log(err)
-			pool.end()
+async function runQuery(queryText){
+	await conn.query(queryText)
+		.then(res=>{
+			console.log(res);
+		})
+		.catch(err =>{
+			console.error(err);
 		});
 };
-let queryText;
-const createCustomersTable = () =>{
-	queryText = `CREATE TABLE IF NOT EXISTS customers (
-	id SERIAL PRIMARY KEY AUTOINCREMENT = TRUE,
+
+
+const customersTable =()=>{
+	const textQuery= `CREATE TABLE IF NOT EXISTS customers (
+	id SERIAL PRIMARY KEY NOT NULL,
 	firstName VARCHAR(50) NOT NULL,
 	lastname VARCHAR(50) NOT NULL,
 	location VARCHAR(100) NOT NULL,
@@ -28,16 +22,36 @@ const createCustomersTable = () =>{
 	contact TEXT NOT NULL,
 	creditCard TEXT 
 	)`;
-	runQuery(queryText);
+	runQuery(textQuery)
+
+};
+const booksTable =()=>{
+	const textQuery= `CREATE TABLE IF NOT EXISTS books (
+	id SERIAL PRIMARY KEY NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	authorId INT NOT NULL,
+	type VARCHAR(100) NOT NULL,
+	isbnCode VARCHAR(100) UNIQUE NOT NULL,
+	numberInStock TEXT NOT NULL
+	)`;
+	runQuery(textQuery)
+
 };
 
+const dropCustomersTable= ()=>{
+	runQuery('DROP TABLE IF EXISTS customers')
+}
+const dropbooksTable= ()=>{
+	runQuery('DROP TABLE IF EXISTS books')
+}
 
 
-const dropCustomersTable = () =>{
-	runQuery('DROP TABLE IF EXISTS customers');
-};
 
 module.exports = {
-	createCustomersTable,
-	dropCustomersTable
+	customersTable,
+	booksTable,
+	dropCustomersTable,
+	dropbooksTable
 }
+
+require('make-runnable')

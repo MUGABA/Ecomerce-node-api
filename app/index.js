@@ -1,7 +1,13 @@
+require('express-async-error')
 const express = require('express')
 const app = express()
+// require('../server')
+require('./startUp/routes')(app)
+require('./startUp/error')()
 
-
+require("@babel/register")({
+  presets: ["es2015"]
+});
 
 
 
